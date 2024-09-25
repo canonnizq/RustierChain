@@ -1,0 +1,8 @@
+[package]
+name = "RustierChain"
+version = "0.1.0"
+authors = ["CanonNi <canonni@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+ggez = "0.9.3"s
