@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::fs::read_to_string;
 //use serde_json::from_str;
 
+#[derive(Clone)]
 struct Item {
     values: Vec<f64>,
     first_nonzero: i32,
@@ -21,13 +22,11 @@ impl Item {
         self.value_cache = self.values[current_year as usize];
         self.value_cache
     }
-
-    pub fn calculate_velocity(&mut self, current_year: f64) -> f64 {
+    pub fn calculate_velocity(&mut self, _current_year: f64) -> f64 {
         self.velocity_cache = 0.0;
         self.velocity_cache
     }
-
-    fn draw_panel(&self, ctx: &mut Context) -> GameResult {
+    fn draw_panel(&self, _ctx: &mut Context) -> GameResult {
         Ok(())
     }
     
@@ -52,7 +51,7 @@ impl MainState {
     }
 
     pub fn calculate_barriers(&self) -> Vec<f64> {
-        let mut barriers = vec![0.0; self.items.len()];
+        let mut barriers: Vec<f64> = vec![0.0; self.items.len()];
         let mut ordered_items: Vec<Item> = Vec::new();
         
         for item in &self.items {
@@ -60,7 +59,7 @@ impl MainState {
             let index: usize = ordered_items
                 .binary_search_by(|p: &Item| p.value_cache.partial_cmp(&value).unwrap())
                 .unwrap_or_else(|x: usize| x);
-            ordered_items.insert(index, item);
+            ordered_items.insert(index, item.clone());
         }
 
         barriers[0] = 0.0;
