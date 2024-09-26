@@ -15,6 +15,24 @@ struct Item {
     value_cache: f64,
 }
 
+impl Item {
+    
+    pub fn calculate_value(&mut self, current_year: f64) -> f64 {
+        self.value_cache = self.values[current_year as usize];
+        self.value_cache
+    }
+
+    pub fn calculate_velocity(&mut self, current_year: f64) -> f64 {
+        self.velocity_cache = 0.0;
+        self.velocity_cache
+    }
+
+    fn draw_panel(&self, ctx: &mut Context) -> GameResult {
+        Ok(())
+    }
+    
+}
+
 struct MainState {
     current_year: f64,
     items: Vec<Item>,
@@ -53,6 +71,7 @@ impl MainState {
         }
         barriers
     }
+
 }
 
 impl EventHandler for MainState {
