@@ -1,5 +1,5 @@
 use ggez::{Context, ContextBuilder, GameResult};
-//use ggez::graphics::{self, Color};
+use ggez::graphics::{self, Color};
 use ggez::event::{self, EventHandler};
 use ggez::conf::{WindowSetup, WindowMode};
 
@@ -76,14 +76,33 @@ impl MainState {
 impl EventHandler for MainState {
 
     fn update(&mut self, _ctx: &mut Context) -> GameResult {
+        self.current_year += 1.0 / 90.0;
+        if self.current_year >= self.items.len() as f64 {
+            event::quit(ctx);
+        }
         Ok(())
     }
 
     fn draw(&mut self, _ctx: &mut Context) -> GameResult {
-        //let barriers: f64 = calculate_barriers();
+        graphics::clear(ctx, Color::from_rgb(255, 255, 255));
+
+        let barriers = self.calculate_barriers();
+        self.draw_path(ctx, &barriers)?;
+        
+        for item in &self.items {
+            item.draw_panel(ctx)?;
+        }
+
+        graphics::present(ctx)
+    }
+    /*
+    fn draw_path(&self, _ctx: &mut Context, barriers: &Vec<f64>) -> GameResult {
+        for i in 0..self.items.len() {
+            todo!("implement draw logic for path and barriers")
+        }
         Ok(())
     }
-
+    */
 }
 
 fn main() {
