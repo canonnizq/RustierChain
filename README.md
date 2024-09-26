@@ -1,4 +1,5 @@
 # RustierChain
 
-![](https://img.shields.io/badge/Built_with-Rust-brown?logo=rust)
-![](https://img.shields.io/badge/Licensed_under-MIT-green)
+![GitHub top language](https://img.shields.io/github/languages/top/canonnizq/RustierChain)
+![License](https://img.shields.io/github/license/canonnizq/RustierChain)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/canonnizq/RustierChain/main)

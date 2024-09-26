@@ -1,0 +1,34 @@
+{
+  "TEXT_ALPHA": 1.0,
+  "BARRIER_SCALE_UP": 1.0,
+  "PLAY_SPEED": 0.011,
+  "PANEL_COUNT_W": 10,
+  "PANEL_COUNT_H": 6,
+  "vertical": true,
+  "W_W": 1920,
+  "W_H": 930,
+  "MARGIN": 15,
+  "CARD_MARGIN": 25,
+  "SWING_MULTI": 0.03,
+  "MAX_SWING": 60,
+  "PATH_CURVE": 15,
+  "PANEL_CURVE": 10,
+  "SCALE_FACTOR": 1.0,
+
+  "RANK_INTERP": 10,
+  "TRANSITION_TIME": 0.3333,
+  "EPS": 0.15,
+  "DISPLAY_UPDATE_RATE": 0.66,
+
+  "BACKGROUND_COLOR": [255, 255, 255],
+  "BARRIER_COLOR": [0, 0, 0],
+  "PATH_COLOR": [197, 197, 197],
+  "REGION_COLORS": [
+    [255, 155, 197],
+    [213, 213, 0],
+    [168, 168, 255],
+    [255, 180, 80],
+    [83, 224, 83],
+    [152, 152, 152]
+  ]
+}
