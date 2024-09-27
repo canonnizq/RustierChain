@@ -1,5 +1,5 @@
 use ggez::{Context, ContextBuilder, GameResult};
-use ggez::graphics::{self, Color};
+use ggez::graphics::{self, Canvas, Color};
 use ggez::event::{self, EventHandler};
 use ggez::conf::{WindowSetup, WindowMode};
 
@@ -7,10 +7,10 @@ use std::collections::HashMap;
 use std::fs::read_to_string;
 use serde_json::{Value, from_str};
 
-fn json(key: String) -> Value {
-    let data = read_to_string("/config/config.json").expect("bad path");
+fn json(key: &str) -> Option<Value> {
+    let data = read_to_string("config/config.json").expect("bad path");
     let v: Value = from_str(&data).expect("bad json");
-    v[key].clone()
+    v.get(key).cloned()
 }
 
 #[derive(Clone)]
@@ -52,7 +52,7 @@ impl MainState {
             current_year: 1790.0,
             items: Vec::new(),
             year_index: HashMap::new(),
-            data: vec![read_to_string("/data/states.tsv").expect("read tsv failed")],
+            data: vec![read_to_string("data/states.tsv").expect("read tsv failed")],
         })
     }
 
@@ -90,16 +90,16 @@ impl EventHandler for MainState {
     }
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
-        graphics::clear(ctx, Color::from_rgb(255, 255, 255));
+        let mut canvas: Canvas = graphics::Canvas::from_frame(ctx, Color::WHITE);
 
         let barriers: Vec<f64> = self.calculate_barriers();
-        self.draw_path(ctx, &barriers)?;
+        // self.draw_path(ctx, &barriers)?;
         
         for item in &self.items {
             item.draw_panel(ctx)?;
         }
 
-        graphics::present(ctx)
+        canvas.finish(ctx)
     }
     /*
     fn draw_path(&self, _ctx: &mut Context, barriers: &Vec<f64>) -> GameResult {
@@ -112,13 +112,14 @@ impl EventHandler for MainState {
 }
 
 fn main() {
+    #[allow(unused_variables)]
 
     let (mut ctx, event_loop) = ContextBuilder::new("RustierChain", "CanonNi")
         .window_setup(WindowSetup::default().title("RustierChain"))
         .window_mode(WindowMode::default().dimensions(1920.0, 1080.0))
         .build().expect("ggez creation failed");
 
-    let state = MainState::new(&mut ctx);
+    let state: MainState = MainState::new(&mut ctx).expect("state creation failed");
     event::run(ctx, event_loop, state);
 
 }
