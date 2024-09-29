@@ -7,6 +7,8 @@ use std::collections::HashMap;
 use std::fs::read_to_string;
 use serde_json::{Value, from_str};
 
+mod util;
+
 fn json(key: &str) -> Option<Value> {
     let data = read_to_string("config/config.json").expect("bad path");
     let v: Value = from_str(&data).expect("bad json");
