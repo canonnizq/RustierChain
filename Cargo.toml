@@ -1,7 +1,7 @@
 [package]
 name = "RustierChain"
 version = "0.1.0"
-authors = ["CanonNi <canonni@gmail.com>"]
+authors = ["CanonNi <canonnizq@gmail.com>", "T.S. Stiffens <tsstiffens@gmail.com>"]
 edition = "2021"
 
 [dependencies]

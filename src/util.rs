@@ -39,6 +39,6 @@ pub fn commafy(f: f64) -> String {
     res
 }
 
-pub fn vec_to_text(vec: Vec<f64>, year: f64) -> String {
-    vec_lookup(&vec, year).round().to_string()
+pub fn vec_to_text(vec: &Vec<f64>, year: f64) -> String {
+    vec_lookup(vec, year).round().to_string()
 }
