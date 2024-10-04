@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::fs::read_to_string;
 use serde_json::{Value, from_str};
 
+mod config;
 mod util;
 
 fn json(key: &str) -> Option<Value> {
@@ -69,7 +70,7 @@ impl MainState {
                 .unwrap_or_else(|x: usize| x);
             ordered_items.insert(index, item.clone());
         }
-
+        
         barriers[0] = 0.0;
         for i in 1..self.items.len() {
             let vp = ordered_items[i-1].value_cache;
@@ -114,7 +115,6 @@ impl EventHandler for MainState {
 }
 
 fn main() {
-    #[allow(unused_variables)]
 
     let (mut ctx, event_loop) = ContextBuilder::new("RustierChain", "CanonNi")
         .window_setup(WindowSetup::default().title("RustierChain"))
