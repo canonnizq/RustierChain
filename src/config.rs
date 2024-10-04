@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use serde::Deserialize; 
 use std::fs::read_to_string;
 use std::error::Error;
@@ -10,8 +12,8 @@ pub struct Config {
     pub panel_count_w: i32,
     pub panel_count_h: i32,
     pub vertical: bool,
-    pub window_w: f64,
-    pub window_h: f64,
+    pub window_w: f32,
+    pub window_h: f32,
     pub margin: i32,
     pub card_margin: i32,
     pub swing_multi: i32,

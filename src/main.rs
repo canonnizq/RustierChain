@@ -122,7 +122,7 @@ fn main() {
 
     let (mut ctx, event_loop) = ContextBuilder::new("RustierChain", "CanonNi")
         .window_setup(WindowSetup::default().title("RustierChain"))
-        .window_mode(WindowMode::default().dimensions(1920.0, 1080.0))
+        .window_mode(WindowMode::default().dimensions(CONF.window_w, CONF.window_h))
         .build().expect("ggez creation failed");
 
     let state: MainState = MainState::new(&mut ctx).expect("state creation failed");

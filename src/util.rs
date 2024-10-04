@@ -7,8 +7,7 @@ static CONF: Lazy<config::Config> = Lazy::new(|| {
 });
 
 pub fn safe_vec(vec: &Vec<f64>, i: i32) -> f64 {
-    use std::cmp;
-    let i2: i32 = cmp::min(cmp::max(i, 0), vec.len() as i32-1);
+    let i2: i32 = i32::min(i32::max(i, 0), vec.len() as i32-1);
     vec[i2 as usize]
 }
 
@@ -40,5 +39,9 @@ pub fn commafy(f: f64) -> String {
 }
 
 pub fn vec_to_text(vec: &Vec<f64>, year: f64) -> String {
-    vec_lookup(vec, year).round().to_string()
+    commafy(vec_lookup(vec, year).round())
+}
+
+pub fn cap(val: f64, limit: f64) -> f64 {
+    f64::min(f64::max(val, -limit), limit)
 }
