@@ -1,4 +1,10 @@
-mod config;
+#![allow(dead_code)]
+
+use crate::config;
+use once_cell::sync::Lazy;
+static CONF: Lazy<config::Config> = Lazy::new(|| {
+    config::load_config().expect("load config failed")
+});
 
 pub fn safe_vec(vec: &Vec<f64>, i: i32) -> f64 {
     use std::cmp;
@@ -15,8 +21,8 @@ pub fn vec_lookup(vec: &Vec<f64>, year: f64) -> f64 {
 
 pub fn display_slowed_vec_lookup(vec: &Vec<f64>, year: f64) -> f64 {
     let rounded_year: f64 = (
-        (year + json("PLAY_SPEED") * 0.5) /
-        json("DISPLAY_UPDATE_RATE") * json("DISPLAY_UPDATE_RATE")
-    ).floor() as f64;
+        (year + CONF.play_speed * 0.5) /
+        CONF.display_update_rate).floor()
+        * CONF.display_update_rate;
     vec_lookup(vec, rounded_year)
 }
