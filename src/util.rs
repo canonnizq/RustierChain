@@ -26,3 +26,19 @@ pub fn display_slowed_vec_lookup(vec: &Vec<f64>, year: f64) -> f64 {
         * CONF.display_update_rate;
     vec_lookup(vec, rounded_year)
 }
+
+pub fn commafy(f: f64) -> String {
+    let s: String = f.round().to_string();
+    let mut res: String = String::new();
+    for (i, c) in s.chars().enumerate() {
+        if (s.len() - i) % 3 == 0 && i != 0 {
+            res.push(',')
+        }
+        res.push(c)
+    }
+    res
+}
+
+pub fn vec_to_text(vec: Vec<f64>, year: f64) -> String {
+    vec_lookup(&vec, year).round().to_string()
+}
