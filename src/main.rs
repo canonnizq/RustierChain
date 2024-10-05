@@ -4,8 +4,6 @@ use ggez::event::{self, EventHandler};
 use ggez::conf::{WindowSetup, WindowMode};
 
 use std::collections::HashMap;
-use std::fs::read_to_string;
-use serde_json::{Value, from_str};
 
 mod util;
 mod config;
@@ -13,12 +11,6 @@ use once_cell::sync::Lazy;
 static CONF: Lazy<config::Config> = Lazy::new(|| {
     config::load_config().expect("load config failed")
 });
-
-fn json(key: &str) -> Option<Value> {
-    let data = read_to_string("config/config.json").expect("bad path");
-    let v: Value = from_str(&data).expect("bad json");
-    v.get(key).cloned()
-}
 
 #[derive(Clone)]
 struct Item {
@@ -49,7 +41,7 @@ struct MainState {
     current_year: f64,
     items: Vec<Item>,
     year_index: HashMap<String, usize>,
-    data: Vec<String>,
+    //data: Vec<String>,
 }
 
 impl MainState {
@@ -59,7 +51,7 @@ impl MainState {
             current_year: 1790.0,
             items: Vec::new(),
             year_index: HashMap::new(),
-            data: vec![read_to_string("data/states.tsv").expect("read tsv failed")],
+            //data: vec![read_to_string("data/states.tsv").expect("read tsv failed")],
         })
     }
 

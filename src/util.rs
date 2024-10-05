@@ -20,9 +20,9 @@ pub fn vec_lookup(vec: &Vec<f64>, year: f64) -> f64 {
 
 pub fn display_slowed_vec_lookup(vec: &Vec<f64>, year: f64) -> f64 {
     let rounded_year: f64 = (
-        (year + CONF.play_speed * 0.5) /
-        CONF.display_update_rate).floor()
-        * CONF.display_update_rate;
+        (year + CONF.PLAY_SPEED * 0.5) /
+        CONF.DISPLAY_UPDATE_RATE).floor()
+        * CONF.DISPLAY_UPDATE_RATE;
     vec_lookup(vec, rounded_year)
 }
 

@@ -4,7 +4,7 @@
   "PLAY_SPEED": 0.011,
   "PANEL_COUNT_W": 10,
   "PANEL_COUNT_H": 6,
-  "vertical": true,
+  "VERTICAL": true,
   "WINDOW_W": 1920.0,
   "WINDOW_H": 930.0,
   "MARGIN": 15,
