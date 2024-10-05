@@ -1,5 +1,6 @@
 use crate::config::CONF;
 use crate::util;
+use ggez::graphics::{Color, Image};
 
 #[derive(Clone)]
 pub struct Item {
@@ -15,6 +16,7 @@ pub struct Item {
     map_coor: Vec<i32>,
     totals: Vec<f64>,
     current_year: f64,
+    thumbnail: Image
 }
 
 impl Item {
@@ -54,6 +56,19 @@ impl Item {
         let a_rank_post: f64 = util::wa_index_i_erp(&self.ranks, y + CONF.eps, CONF.transition_time);
         self.velocity_cache = (a_rank_post - a_rank_pre) / (CONF.eps * 2.0);
         self.velocity_cache
+    }
+
+    pub fn get_tinge(&self) -> Color {
+        let hues: &Vec<i32> = &CONF.region_colors[self.col as usize];
+        Color::new(hues[0] as f32, hues[1] as f32, hues[2] as f32, 1.0)
+    }
+
+    pub fn draw_panel() {
+
+    }
+
+    pub fn mar_image() {
+        
     }
 
 }
