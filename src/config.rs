@@ -36,6 +36,7 @@ pub struct Config {
 
 pub fn load_config() -> Result<Config, Box<dyn Error>> {
     let file: String = read_to_string("/config/config.json").expect("read config failed");
+    let file: String = read_to_string("/config/config.json").expect("read config failed");
     let config: Config = serde_json::from_str(&file).expect("parse json failed");
     Ok(config)
 }
