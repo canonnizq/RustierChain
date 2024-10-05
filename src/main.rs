@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use ggez::{Context, ContextBuilder, GameResult};
 use ggez::graphics::{self, Canvas, Color};
 use ggez::event::{self, EventHandler};
@@ -5,37 +7,12 @@ use ggez::conf::{WindowSetup, WindowMode};
 
 use std::collections::HashMap;
 
-mod util;
+mod util; 
 mod config;
-use once_cell::sync::Lazy;
-static CONF: Lazy<config::Config> = Lazy::new(|| {
-    config::load_config().expect("load config failed")
-});
+mod item;
+use crate::config::CONF;
+use crate::item::Item;
 
-#[derive(Clone)]
-struct Item {
-    values: Vec<f64>,
-    first_nonzero: i32,
-    ranks: Vec<usize>,
-    velocity_cache: f64,
-    value_cache: f64,
-}
-
-impl Item {
-    
-    pub fn calculate_value(&mut self, current_year: f64) -> f64 {
-        self.value_cache = self.values[current_year as usize];
-        self.value_cache
-    }
-    pub fn calculate_velocity(&mut self, _current_year: f64) -> f64 {
-        self.velocity_cache = 0.0;
-        self.velocity_cache
-    }
-    fn draw_panel(&self, _ctx: &mut Context) -> GameResult {
-        Ok(())
-    }
-    
-}
 
 struct MainState {
     current_year: f64,
@@ -89,14 +66,10 @@ impl EventHandler for MainState {
     }
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
-        let mut canvas: Canvas = graphics::Canvas::from_frame(ctx, Color::WHITE);
+        let canvas: Canvas = graphics::Canvas::from_frame(ctx, Color::WHITE);
 
-        let barriers: Vec<f64> = self.calculate_barriers();
+        let _barriers: Vec<f64> = self.calculate_barriers();
         // self.draw_path(ctx, &barriers)?;
-        
-        for item in &self.items {
-            item.draw_panel(ctx)?;
-        }
 
         canvas.finish(ctx)
     }

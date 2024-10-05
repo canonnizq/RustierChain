@@ -1,9 +1,5 @@
-#![allow(dead_code)]
-
 use serde::Deserialize;
-use std::fs::read_to_string;
-use std::error::Error;
-
+#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct Config {
     pub text_alpha: f64,
@@ -22,7 +18,6 @@ pub struct Config {
     pub panel_curve: i32,
     pub scale_factor: f64,
 
-
     pub rank_interp: i32,
     pub transition_time: f64,
     pub eps: f64,
@@ -31,12 +26,18 @@ pub struct Config {
     pub background_color: Vec<i32>,
     pub barrier_color: Vec<i32>,
     pub path_color: Vec<i32>,
-    pub region_colors: Vec<Vec<i32>>
+    pub region_colors: Vec<Vec<i32>>,
 }
 
+use std::fs::read_to_string;
+use std::error::Error;
 pub fn load_config() -> Result<Config, Box<dyn Error>> {
-    let file: String = read_to_string("/config/config.json").expect("read config failed");
-    let file: String = read_to_string("/config/config.json").expect("read config failed");
+    let file: String = read_to_string("config/config.json").expect("read config failed");
     let config: Config = serde_json::from_str(&file).expect("parse json failed");
     Ok(config)
 }
+
+use once_cell::sync::Lazy;
+pub static CONF: Lazy<Config> = Lazy::new(|| {
+    load_config().expect("load config failed")
+});
